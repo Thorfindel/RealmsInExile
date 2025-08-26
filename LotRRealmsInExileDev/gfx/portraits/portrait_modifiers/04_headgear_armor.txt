@@ -40,6 +40,7 @@
 			base = 0
             modifier = {
                 add = 201
+				is_elf = yes
 				portrait_wear_helmet_trigger = yes
  				exists = liege				
 				liege.culture = culture:lasgalendrim
@@ -87,6 +88,7 @@
 			base = 0
             modifier = {
                 add = 201
+				is_elf = yes
 				portrait_wear_helmet_trigger = yes
  				exists = liege				
 				liege.culture = culture:noldor
@@ -104,11 +106,12 @@
 				range = { 0.61 0.79 } # For the randomness to work correctly
 			}
 		}
-        outfit_tags = { military_outfit }		
+        outfit_tags = { military_outfit elven_war_sindar }		
 		weight = {
 			base = 0
             modifier = {
                 add = 201
+				is_elf = yes
 				portrait_wear_helmet_trigger = yes
  				exists = liege				
 				liege.culture = culture:sindar
@@ -130,6 +133,7 @@
 			base = 0
             modifier = {
                 add = 201
+				is_elf = yes
 				portrait_wear_helmet_trigger = yes
  				exists = liege				
 				liege.culture = culture:falathrim
@@ -150,6 +154,7 @@
 			base = 0
             modifier = {
                 add = 201
+				is_elf = yes
 				portrait_wear_helmet_trigger = yes
  				exists = liege				
 				liege.culture = culture:galadhrim
