@@ -15,8 +15,7 @@
 		}
 		modifier = {
 			factor = 1.25
-			exists = dynasty
-			dynasty = {
+			dynasty ?= {
 				has_dynasty_perk = warfare_legacy_3
 			}
 		}
@@ -54,14 +53,13 @@ knight_berserker_attack = {
 
 	is_valid = {
 		has_trait = berserker
-		#is_berserker = yes	#lotr
 		scope:combat_side.enemy_side = {
 			any_side_knight = {
 				is_alive = yes
 				this.prowess <= root.prowess_for_combat_event_opponent
-				NOT = { is_elf = yes }
-				cannot_be_killed = no
-				not = {
+				NOT = { is_elf = yes } #LotR
+				cannot_be_killed = no #LotR
+				NOT = { #LotR
 					has_character_flag = is_eldarion
 					age < 60
 				}
@@ -83,8 +81,7 @@ knight_berserker_attack = {
 		}
 		modifier = {
 			factor = 1.25
-			exists = dynasty
-			dynasty = {
+			dynasty ?= {
 				has_dynasty_perk = warfare_legacy_3
 			}
 		}
@@ -159,8 +156,7 @@ knight_berserker_attack = {
 				scope:enemy_knight = {
 					if = {
 						limit = {
-							exists = accolade
-							accolade = { is_accolade_active = yes }
+							accolade ?= { is_accolade_active = yes }
 						}
 						accolade = { add_glory = minimal_glory_gain }
 					}
@@ -196,10 +192,10 @@ knight_become_berserker = {
 		NOR = {
 			has_trait = craven
 			#has_trait = berserker
-			is_berserker = yes	#lotr
+			is_berserker = yes #LotR
 			has_trait = calm
-			is_elf = yes
-			cannot_be_killed = yes
+			is_elf = yes #LotR
+			cannot_be_killed = yes #LotR
 		}
 	}
 
@@ -217,8 +213,7 @@ knight_become_berserker = {
 		}
 		modifier = {
 			factor = 1.25
-			exists = dynasty
-			dynasty = {
+			dynasty ?= {
 				has_dynasty_perk = warfare_legacy_3
 			}
 		}
@@ -337,9 +332,9 @@ knight_become_berserker = {
 					root = { is_alive = yes }
 					scope:enemy_knight = { 
 						is_alive = yes
-						cannot_be_killed = no
-						NOT = { is_elf = yes }
-						not = {
+						cannot_be_killed = no #LotR
+						NOT = { is_elf = yes } #LotR
+						NOT = { #LotR
 							has_character_flag = is_eldarion
 							age < 60
 						}
@@ -363,7 +358,7 @@ knight_become_berserker = {
 						killer = root
 					}
 				}
-				if = {
+				if = { #LotR
 					limit = {
 						culture = culture:isengard_urukhai
 					}
@@ -387,8 +382,7 @@ knight_become_berserker = {
 						target_right = yes
 					}
 				}
-				#add_trait = berserker
-				if = {
+				if = { #LotR
 					limit = {
 						culture = culture:isengard_urukhai
 					}
@@ -422,9 +416,9 @@ knight_shieldmaiden_attack = {
 			any_side_knight = {
 				is_alive = yes
 				this.prowess <= root.prowess_for_combat_event_opponent
-				NOT = { is_elf = yes }
-				cannot_be_killed = no
-				not = {
+				NOT = { is_elf = yes } #LotR
+				cannot_be_killed = no #LotR
+				NOT = { #LotR
 					has_character_flag = is_eldarion
 					age < 60
 				}
@@ -446,8 +440,7 @@ knight_shieldmaiden_attack = {
 		}
 		modifier = {
 			factor = 1.25
-			exists = dynasty
-			dynasty = {
+			dynasty ?= {
 				has_dynasty_perk = warfare_legacy_3
 			}
 		}
@@ -521,8 +514,7 @@ knight_shieldmaiden_attack = {
 				scope:enemy_knight = {
 					if = {
 						limit = {
-							exists = accolade
-							accolade = { is_accolade_active = yes }
+							accolade ?= { is_accolade_active = yes }
 						}
 						# Shieldmaidens are especially good at earning glory.
 						accolade = { add_glory = minor_glory_gain }
@@ -538,26 +530,26 @@ knight_becomes_incapable = {
 
 	is_valid = {
 		is_incapable = no
-		cannot_be_killed = no
-		NOT = { is_elf = yes }
-		lotr_canon_safe_from_harm_trigger = no
+		cannot_be_killed = no #LotR
+		NOT = { is_elf = yes } #LotR
+		lotr_canon_safe_from_harm_trigger = no #LotR
 	}
 
 	chance = {
 		# This is just random bad luck of suffering a serious head injury.
 		base = 1
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			OR = {
 				numenorean_blood_tier < 5
 				is_hobbit = yes
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			has_trait = skinchanger
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.25
 			OR = {
 				numenorean_blood_tier >= 5
@@ -655,16 +647,14 @@ knight_wounded = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_low
 							
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_low
 						}
@@ -673,8 +663,7 @@ knight_wounded = {
 				# Not cumulative with subsequent ranks.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_defends_family_medium
@@ -683,8 +672,7 @@ knight_wounded = {
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_defends_family_medium
@@ -704,15 +692,13 @@ knight_wounded = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_medium
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_medium
 						}
@@ -721,15 +707,13 @@ knight_wounded = {
 				# Not cumulative with the subsequent rank.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
@@ -746,15 +730,13 @@ knight_wounded = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
@@ -762,25 +744,25 @@ knight_wounded = {
 				}
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			OR = {
 				numenorean_blood_tier < 5
 				is_hobbit = yes
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			has_trait = skinchanger
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.25
 			OR = {
 				numenorean_blood_tier >= 5
 				is_dwarf = yes
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.1
 			OR = {
 				cannot_be_killed = yes
@@ -821,8 +803,7 @@ knight_wounded = {
 			scope:enemy_knight = {
 				if = {
 					limit = {
-						exists = accolade
-						accolade = { is_accolade_active = yes }
+						accolade ?= { is_accolade_active = yes }
 					}
 					accolade = { add_glory = minimal_glory_gain }
 				}
@@ -851,7 +832,7 @@ knight_maimed = {
 			has_trait = one_eyed
 			has_trait = maimed
 		}
-		cannot_be_killed = no
+		cannot_be_killed = no #LotR
 	}
 
 	chance = {
@@ -917,15 +898,13 @@ knight_maimed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_low
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_low
 						}
@@ -934,8 +913,7 @@ knight_maimed = {
 				# Not cumulative with subsequent ranks.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_defends_family_medium
@@ -944,8 +922,7 @@ knight_maimed = {
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_defends_family_medium
@@ -965,15 +942,13 @@ knight_maimed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_medium
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_medium
 						}
@@ -982,15 +957,13 @@ knight_maimed = {
 				# Not cumulative with the subsequent rank.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
@@ -1007,15 +980,13 @@ knight_maimed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
@@ -1023,25 +994,25 @@ knight_maimed = {
 				}
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			OR = {
 				numenorean_blood_tier < 5
 				is_hobbit = yes
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			has_trait = skinchanger
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.25
 			OR = {
 				numenorean_blood_tier >= 5
 				is_dwarf = yes
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.1
 			OR = {
 				is_elf = yes
@@ -1081,8 +1052,7 @@ knight_maimed = {
 			scope:enemy_knight = {
 				if = {
 					limit = {
-						exists = accolade
-						accolade = { is_accolade_active = yes }
+						accolade ?= { is_accolade_active = yes }
 					}
 					accolade = { add_glory = minimal_glory_gain }
 				}
@@ -1104,7 +1074,7 @@ knight_maimed = {
 knight_black_breathed = {
 	type = knight
 
-	is_valid = {
+	is_valid = { #LotR
 		NOR = {
 			is_elf = yes
 			cannot_be_killed = yes
@@ -1180,15 +1150,13 @@ knight_black_breathed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_low
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_low
 						}
@@ -1197,8 +1165,7 @@ knight_black_breathed = {
 				# Not cumulative with subsequent ranks.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_increase_hostile_knight_death_medium
@@ -1207,8 +1174,7 @@ knight_black_breathed = {
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_increase_hostile_knight_death_medium
@@ -1225,15 +1191,13 @@ knight_black_breathed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_medium
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_medium
 						}
@@ -1242,15 +1206,13 @@ knight_black_breathed = {
 				# Not cumulative with the subsequent rank.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_high
 						}
@@ -1264,15 +1226,13 @@ knight_black_breathed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_increase_hostile_knight_death_high
 						}
@@ -1290,15 +1250,13 @@ knight_black_breathed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_low
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_low
 						}
@@ -1307,8 +1265,7 @@ knight_black_breathed = {
 				# Not cumulative with subsequent ranks.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_defends_family_medium
@@ -1317,8 +1274,7 @@ knight_black_breathed = {
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							OR = {
 								has_accolade_parameter = accolade_defends_family_medium
@@ -1338,15 +1294,13 @@ knight_black_breathed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_medium
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_medium
 						}
@@ -1355,15 +1309,13 @@ knight_black_breathed = {
 				# Not cumulative with the subsequent rank.
 				NOR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
@@ -1380,15 +1332,13 @@ knight_black_breathed = {
 			scope:combat_side = {
 				OR = {
 					any_side_knight = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
 					}
 					any_side_commander = {
-						exists = accolade
-						accolade = {
+						accolade ?= {
 							is_accolade_active = yes
 							has_accolade_parameter = accolade_defends_family_high
 						}
@@ -1396,18 +1346,18 @@ knight_black_breathed = {
 				}
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			OR = {
 				numenorean_blood_tier < 5
 				is_hobbit = yes
 			}
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.5
 			has_trait = skinchanger
 		}
-		modifier = {
+		modifier = { #LotR
 			factor = 0.25
 			OR = {
 				numenorean_blood_tier >= 5
@@ -1416,7 +1366,7 @@ knight_black_breathed = {
 		}
 	}
 
-	effect = {
+	effect = { #LotR
 		if = {
 			limit = {
 				scope:combat_side.enemy_side = {
@@ -1587,10 +1537,19 @@ knight_killed = {
 					scope:enemy_knight = {
 						if = {
 							limit = {
-								exists = accolade
-								accolade = { is_accolade_active = yes }
+								accolade ?= { is_accolade_active = yes }
 							}
 							accolade = { add_glory = minor_glory_gain }
+						}
+						#LotR - Knight's liege gets some hope if killed an evil knight
+						if = {
+							limit = {
+								employer = { is_elf = yes }
+								root = { faith_is_evil = yes }
+							}
+							employer = { 
+								add_elven_hope_effect = { VALUE = minor_elven_hope_gain HOPE_EFFECT = effect_elven_hope_evil_knight_killed }
+							}
 						}
 					}
 				}
@@ -1612,6 +1571,29 @@ knight_killed = {
 					add_to_variable_list = {
 						name = slain_side_knights
 						target = root
+					}
+				}
+				house ?= {
+					change_house_relation_effect = {
+						HOUSE = scope:enemy_knight.house
+						VALUE = house_relation_damage_medium_value
+						REASON = killed
+						CHAR = root
+						TARGET_CHAR = scope:enemy_knight
+						TITLE = scope:dummy_gender
+					}
+				}
+				if = {
+					limit = {
+						scope:enemy_knight = {
+							faith = {
+								has_doctrine = tenet_cranial_trophies
+							}
+						}
+					}
+					tgp_cranial_trophies_beheading_effect = {
+						KILLER = scope:enemy_knight
+						DEAD = root
 					}
 				}
 				death = {
@@ -1645,6 +1627,21 @@ knight_killed = {
 				add_glory = minor_glory_gain
 			}
 		}
+		#LotR - Employer loses hope if Elven
+		employer = {
+			if = {
+				limit = { 
+					is_elf = yes 
+					root = { #Unimportant elven knight
+						is_elf = yes
+						is_ruler = no
+						NOT = { any_close_or_extended_family_member = { is_ruler = yes } }
+					}
+				}
+				add_elven_hope_effect = { VALUE = minor_elven_hope_gain HOPE_EFFECT = effect_elven_hope_elven_knight_killed }
+			}
+		}
+
 		#Mongol severed head content
 		if = {
 			limit = {
